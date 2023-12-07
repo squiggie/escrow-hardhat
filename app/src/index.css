@@ -68,3 +68,18 @@ input[type="text"] {
   color: #5aa75a;
   text-align: center;
 }
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.approved-box {
+  padding: 10px;
+  background-color: #90ee90; /* Light green background */
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+

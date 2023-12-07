@@ -2,6 +2,8 @@
 pragma solidity 0.8.17;
 
 contract Escrow {
+	event Approved(uint);
+
 	address public arbiter;
 	address public beneficiary;
 	address public depositor;
@@ -14,8 +16,6 @@ contract Escrow {
 		depositor = msg.sender;
 	}
 
-	event Approved(uint);
-
 	function approve() external {
 		require(msg.sender == arbiter);
 		uint balance = address(this).balance;
@@ -24,4 +24,13 @@ contract Escrow {
 		emit Approved(balance);
 		isApproved = true;
 	}
+}
+
+contract EscrowFactory {
+    event EscrowCreated(address indexed creator, address escrowAddress);
+
+    function createEscrow(address arbiter, address beneficiary) public payable {
+        Escrow newEscrow = new Escrow(arbiter, beneficiary);
+        emit EscrowCreated(msg.sender, address(newEscrow));
+    }
 }
